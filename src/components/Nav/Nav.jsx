@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../context/Auth.context";
 function Nav(){
-    const {logout} = useContext(AuthContext);
+    const {token, logout} = useContext(AuthContext);
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     function handleLogout() {
@@ -15,7 +15,7 @@ function Nav(){
     }
     return(
         <header>
-            <div className="container-style">
+            <div className="container-style text-sm">
                 {/* Top Nav */}
                 <div className="hidden lg:flex justify-between text-sm border-b border-gray-300">
                     <ul className="flex *:p-2">
@@ -89,22 +89,34 @@ function Nav(){
                                     <div>Account</div>
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink to="signup" className={({isActive})=> isActive ? "text-primary-500" : ""}>
-                                    <FontAwesomeIcon icon={faUserPlus} />
-                                    <div>Sign up</div>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="login" className={({isActive})=> isActive ? "text-primary-500" : ""}>
-                                    <FontAwesomeIcon icon={faAddressCard} />
-                                    <div>Login</div>
-                                </NavLink>
-                            </li>
-                            <li className="cursor-pointer">
-                                <FontAwesomeIcon icon={faRightFromBracket} />
-                                <button onClick={handleLogout} className="block">Logout</button>
-                            </li>
+                            {
+                                !token &&
+                                    <>
+                                        <li>
+                                            <NavLink to="signup" className={({isActive})=> isActive ? "text-primary-500" : ""}>
+                                                <FontAwesomeIcon icon={faUserPlus} />
+                                                <div>Sign up</div>
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="login" className={({isActive})=> isActive ? "text-primary-500" : ""}>
+                                                <FontAwesomeIcon icon={faAddressCard} />
+                                                <div>Login</div>
+                                            </NavLink>
+                                        </li>
+                                    </>
+                            }
+                            {
+                                token &&
+                                    <li className="cursor-pointer">
+                                        <button onClick={handleLogout} className="block">
+                                            <div>
+                                                <FontAwesomeIcon icon={faRightFromBracket} />
+                                            </div>
+                                            <p>Logout</p>
+                                        </button>
+                                    </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -118,7 +130,7 @@ function Nav(){
                             <span>All Categories</span>
                             <FontAwesomeIcon icon={faChevronDown} />
                         </button>
-                        <menu className="hidden group-hover:block absolute text-sm bg-white *:p-3 *:border-b *:border-gray-300 *:hover:bg-gray-300">
+                        <menu className="hidden group-hover:block z-20 absolute text-sm bg-white *:p-3 *:border-b *:border-gray-300 *:hover:bg-gray-300">
                             <li>
                                 <Link>
                                    Men's Clothing
@@ -191,18 +203,31 @@ function Nav(){
                             </ul>
                             <h2 className="font-bold text-xl mt-5">Account</h2>
                             <ul className="*:py-3 *:flex *:items-center *:gap-2 *:hover:text-primary-500 *:transition-colors *:duration-300">
-                                <li>
-                                    <FontAwesomeIcon icon={faUserPlus} />
-                                    <NavLink to="/signup" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>sign up</NavLink>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faAddressCard} />
-                                    <NavLink to="/login" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>login</NavLink>
-                                </li>
-                                <li>
-                                    <FontAwesomeIcon icon={faRightFromBracket} />
-                                    <button onClick={handleLogout}>logout</button>
-                                </li>
+                                {!token && 
+                                    <>
+                                        <li>
+                                            <FontAwesomeIcon icon={faUserPlus} />
+                                            <NavLink to="/signup" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>sign up</NavLink>
+                                        </li>
+                                        <li>
+                                            <FontAwesomeIcon icon={faAddressCard} />
+                                            <NavLink to="/login" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>login</NavLink>
+                                        </li>
+                                    </>
+                                }
+                                {
+                                    token &&
+                                        <li>
+                                            <button className="flex items-center gap-2" onClick={handleLogout}>
+                                                <div>
+                                                    <FontAwesomeIcon icon={faRightFromBracket} />
+                                                </div>
+                                                <p>
+                                                    logout
+                                                </p>
+                                            </button>
+                                        </li>
+                                }
                             </ul>
                         </nav>
                     </div>

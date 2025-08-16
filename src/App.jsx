@@ -31,10 +31,10 @@ function App() {
   ])
 
   return (
-    <>
+    <section className='bg-gray-100'>
         <RouterProvider router={router} />
         <ToastContainer autoClose={2000} />
-    </>
+    </section>
   )
 }
 

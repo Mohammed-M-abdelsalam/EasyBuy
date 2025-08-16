@@ -9,7 +9,7 @@ import {
 function Footer() {
   return (
     <footer className="container-style">
-      <div className=" flex flex-wrap justify-between border-b border-gray-300 text-center *:w-full md:*:w-1/2 md:text-start lg:*:w-1/4 *:p-5 ">
+      <div className=" flex flex-wrap justify-between border-b border-gray-300 text-center *:w-full md:*:w-1/2 md:text-start lg:*:w-1/4 *:p-5 *:pl-0">
         <div>
           <h2 className="font-bold mb-3">EasyBuy</h2>
           <p className="mb-3">
