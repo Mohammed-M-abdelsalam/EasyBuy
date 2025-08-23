@@ -19,9 +19,7 @@ function App() {
         {
           path: 'product/:id',
           element: 
-            <ProtectedRoutes>
-              <ProductDetails />
-            </ProtectedRoutes>
+            <ProductDetails />
         },
         {
           path: 'cart',
