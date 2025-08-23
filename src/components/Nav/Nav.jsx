@@ -125,7 +125,7 @@ function Nav(){
             <nav className="hidden lg:block bg-gray-100 py-3">
                 <div className="container-style flex items-center gap-8">
                     <div className="relative group">
-                        <button className="btn *:px-1 bg-primary-500 text-white">
+                        <button className="btn *:px-1 text-sm bg-primary-500 text-white">
                             <FontAwesomeIcon icon={faBars} />
                             <span>All Categories</span>
                             <FontAwesomeIcon icon={faChevronDown} />
@@ -153,7 +153,7 @@ function Nav(){
                             </li>
                         </menu>
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 text-sm">
                         <NavLink to="/" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>Home</NavLink>
                         <NavLink to="/recently" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>Recently Added</NavLink>
                         <NavLink to="/featured" className={ ({isActive})=>`${isActive?'text-primary-500': ''}` }>Featured Products</NavLink>

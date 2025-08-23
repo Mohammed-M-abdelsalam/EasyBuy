@@ -36,7 +36,7 @@ function HomeDeals() {
                         <p>offers ends in: </p>
                         <div className="text-red-600 text-5xl font-extrabold">
                             {time.days && time.days.toString() || '00'}
-                            <span className="text-sm text-gray-600">Days</span>
+                            <span className="text-sm text-gray-600 ms-1">Days</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="bg-gray-900 text-white min-w-6 h-6 flex items-center justify-center px-1 rounded">{time.hours && time.hours.toString().padStart(2, '0') || '00'}</div>

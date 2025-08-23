@@ -1,17 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import img from '../../assets/images/login/login-img.png'
-import { Link, Navigate, useNavigate } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import { LoginSchema } from './LoginSchema';
 import { toast } from 'react-toastify';
 import { sendDataToLogin } from '../../services/auth-service';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
 import { AuthContext } from '../../context/Auth.context';
 
 function Login(){
+    const location = useLocation();
+    const from = location.state?.from || '/';
     const {token, login} = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ function Login(){
                 toast.success('Login successful');
                 setTimeout(() => {
                     login(data.token, values.checkbox);
-                    navigate('/');
+                    navigate(from, {replace: true});
                 }, 2000);
             }
         }).catch(err => {
@@ -41,7 +43,9 @@ function Login(){
         onSubmit: handleLogin
     })
 
-    if(token) return <Navigate to="/" />
+    useEffect(() => {
+        if(token) navigate('/', {replace: true});
+    }, [token, navigate]);
     return(
         <div className="bg-gray-100 min-h-screen">
             <div className="container-style flex justify-center lg:*:w-1/2 *:p-5 py-5">

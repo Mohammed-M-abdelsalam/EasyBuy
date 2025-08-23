@@ -2,10 +2,11 @@ import { faCodeCompare, faEye, faHeart, faPlus } from "@fortawesome/free-solid-s
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Rating from "../Rating/Rating"
 import { calculateProductDiscount } from "../../utils/prouctDiscount"
+import { Link } from "react-router"
 
 function ProductCard({product}){
     const discount = calculateProductDiscount(product.price, product.priceAfterDiscount)
-    const {slug, title, description, images, price, priceAfterDiscount, ratingsAverage} = product
+    const {id, slug, title, description, images, price, priceAfterDiscount, ratingsAverage} = product
     return(
         <div className="bg-white relative rounded-xl overflow-hidden shadow">
             <div>
@@ -31,16 +32,16 @@ function ProductCard({product}){
                 priceAfterDiscount &&
                 <div className="absolute top-2 left-2 text-white bg-red-500 text-sm px-4">{discount}%</div>
             }
-            <div className="absolute top-2 right-2 flex flex-col gap-1 text-gray-900">
+            <div className="absolute top-2 right-2 text-lg flex flex-col gap-2 text-gray-900">
                 <button className="hover:text-red-500 transition-colors duration-300">
                     <FontAwesomeIcon icon={faHeart} />
                 </button>
                 <button className="hover:text-blue-500 transition-colors duration-300">
                     <FontAwesomeIcon icon={faCodeCompare} />
                 </button>
-                <button className="hover:text-yellow-500 transition-colors duration-100">
+                <Link to={`/product/${id}`} className="hover:text-yellow-500 transition-colors duration-100">
                     <FontAwesomeIcon icon={faEye} />
-                </button>
+                </Link>
             </div>
         </div> 
     )

@@ -4,6 +4,8 @@ import Signup from './pages/Signup/Signup';
 import { ToastContainer } from 'react-toastify';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
+import ProductDetails from './pages/ProductDetails/ProductDetails';
+import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 function App() {
   const router = createBrowserRouter([
     {
@@ -14,6 +16,20 @@ function App() {
           index: true,
           element: <Home />,
         },
+        {
+          path: 'product/:id',
+          element: 
+            <ProtectedRoutes>
+              <ProductDetails />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'cart',
+          element: 
+            <ProtectedRoutes>
+              <h1>Cart</h1>
+            </ProtectedRoutes>
+        }
       ]
     },
     {
