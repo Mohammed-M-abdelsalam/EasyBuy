@@ -44,8 +44,8 @@ function Login(){
     })
 
     useEffect(() => {
-        if(token) navigate('/', {replace: true});
-    }, [token, navigate]);
+        if(token) navigate(from, {replace: true});
+    }, [token, from, navigate]);
     return(
         <div className="bg-gray-100 min-h-screen">
             <div className="container-style flex justify-center lg:*:w-1/2 *:p-5 py-5">
