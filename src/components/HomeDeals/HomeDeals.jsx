@@ -1,10 +1,9 @@
-import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router"
-import { getAllProducts } from "../../services/products-service"
 import Loading from "../Loading/Loading"
 import ProductCard from "../ProductCard/ProductCard"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { counterDown } from "../../utils/counterDown"
+import { ProductsContext } from "../../context/Products.context"
 
 function HomeDeals() {
     const [time, setTime] = useState(() => counterDown(new Date() + 600000))
@@ -20,13 +19,10 @@ function HomeDeals() {
         return () => clearInterval(interval);
     }, [time]);
 
-    const {data, isLoading, isError, error} = useQuery({
-        queryKey: ['deals'],
-        queryFn: () => getAllProducts(),
-    })
+    const {productsData, isLoading, isError, error} = useContext(ProductsContext);
     if (isLoading) return <Loading />
     if (isError) return <p>{error}</p>
-    const deals =  data?.data?.filter(product => product.priceAfterDiscount).slice(0, 6)
+    const deals =  productsData?.filter(product => product.priceAfterDiscount).slice(0, 6)
     return (
         <section className="container-style">
             <div className="flex justify-between">
@@ -48,7 +44,7 @@ function HomeDeals() {
                 <Link className="text-primary-500 text-sm" to="/">View All Deals</Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 py-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3 py-10">
                 {/* cards */}
                 {deals.map((product) => {
                     return <ProductCard key={product._id} product={product} /> 

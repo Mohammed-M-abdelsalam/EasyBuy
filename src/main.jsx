@@ -5,13 +5,19 @@ import '@fontsource/poppins';
 import App from './App.jsx'
 import { AuthProvider } from './context/Auth.context.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WishlistProvider } from './context/Wishlist.context.jsx';
+import { ProductsProvider } from './context/Products.context.jsx';
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <App />
+        <ProductsProvider>
+          <WishlistProvider>
+            <App />
+          </WishlistProvider>
+        </ProductsProvider>
       </AuthProvider>
     </QueryClientProvider>
   </StrictMode>,

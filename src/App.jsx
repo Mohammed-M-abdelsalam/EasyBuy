@@ -6,6 +6,7 @@ import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
+import Wishlist from './pages/Wishlist/Wishlist';
 function App() {
   const router = createBrowserRouter([
     {
@@ -27,7 +28,14 @@ function App() {
             <ProtectedRoutes>
               <h1>Cart</h1>
             </ProtectedRoutes>
-        }
+        },
+        {
+          path: 'wishlist',
+          element: 
+            <ProtectedRoutes>
+              <Wishlist />
+            </ProtectedRoutes>
+        },
       ]
     },
     {

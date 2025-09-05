@@ -23,7 +23,7 @@
 
 @layer components{
   .container-style{
-    @apply max-w-screen-xl mx-auto px-5 lg:w-1/1;
+    @apply max-w-screen-xl mx-auto w-[90%] lg:w-[80%];
   }
   .form-control{
     @apply border border-gray-400/50 py-1 px-4 rounded-md focus:outline-none focus:border-primary-500;

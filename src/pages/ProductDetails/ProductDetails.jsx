@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft, faTruck } from "@fortawesome/free-solid-svg-icons";
 
 function ProductDetails() {
-    useEffect(() => window.scrollTo(0, 0));
+    useEffect(() => window.scrollTo(0, 0), []);
     const swiperRef = useRef(null);
     const {id} = useParams('id');
     const [quantity, setQuantity] = useState(1);
@@ -65,9 +65,9 @@ function ProductDetails() {
                     <div className="flex items-center gap-5 py-5">
                         <p className="text-xs text-gray-500">Quantity: </p>
                         <div className="relative border border-gray-200 flex items-center gap-5 w-20 h-7">
-                            <button className="absolute left-1 top-0 bottom-0 " onClick={() => quantity > 1 && setQuantity(quantity - 1)}>-</button>
+                            <button type="button" className="absolute left-1 top-0 bottom-0 " onClick={() => quantity > 1 && setQuantity(quantity - 1)}>-</button>
                             <p className="w-full text-center"> {quantity} </p>
-                            <button className="absolute right-1 top-0 bottom-0" onClick={() => setQuantity(quantity + 1)}>+</button>
+                            <button type="button" className="absolute right-1 top-0 bottom-0" onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
                         <p className="text-gray-600 text-xs">only {data?.data?.quantity} left in stock</p>
                     </div>

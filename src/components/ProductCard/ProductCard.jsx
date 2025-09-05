@@ -3,10 +3,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Rating from "../Rating/Rating"
 import { calculateProductDiscount } from "../../utils/prouctDiscount"
 import { Link } from "react-router"
+import { useContext, useEffect, useState } from "react"
+import { WishlistContext } from "../../context/Wishlist.context"
+import { AuthContext } from "../../context/Auth.context"
 
 function ProductCard({product}){
+    const {wishlistData, addWishlistProduct, removeWishlistProduct} = useContext(WishlistContext);
+    const {token} = useContext(AuthContext);
     const discount = calculateProductDiscount(product.price, product.priceAfterDiscount)
-    const {id, slug, title, description, images, price, priceAfterDiscount, ratingsAverage} = product
+    const {id = product._id, slug, title, description, images, price, priceAfterDiscount, ratingsAverage} = product
+    const [isInWishlist, setIsInWishlist] = useState(wishlistData?.find(product => product._id === id) ? true : false);
+    useEffect(() => {
+        setIsInWishlist(wishlistData?.find(product => product._id === id) ? true : false);
+    }, [wishlistData, id]);
+    function handleWishlistButton(){
+        if(!isInWishlist){
+            addWishlistProduct(id, token)
+            setIsInWishlist(true)
+        }else{
+            removeWishlistProduct(id, token)
+            setIsInWishlist(false)
+        }
+    }
     return(
         <div className="bg-white relative rounded-xl overflow-hidden shadow">
             <div>
@@ -33,7 +51,7 @@ function ProductCard({product}){
                 <div className="absolute top-2 left-2 text-white bg-red-500 text-sm px-4">{discount}%</div>
             }
             <div className="absolute top-2 right-2 text-lg flex flex-col gap-2 text-gray-900">
-                <button className="hover:text-red-500 transition-colors duration-300">
+                <button onClick={() => handleWishlistButton()} className={`hover:text-red-600 transition-colors duration-300 ${isInWishlist && 'text-red-600'}`}>
                     <FontAwesomeIcon icon={faHeart} />
                 </button>
                 <button className="hover:text-blue-500 transition-colors duration-300">
