@@ -19,10 +19,10 @@ function ProductCard({product}){
     function handleWishlistButton(){
         if(!token) return
         if(!isInWishlist){
-            addWishlistProduct(id, token)
+            addWishlistProduct(id)
             setIsInWishlist(true)
         }else{
-            removeWishlistProduct(id, token)
+            removeWishlistProduct(id)
             setIsInWishlist(false)
         }
     }

@@ -2,11 +2,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Rating from "../Rating/Rating"
 import { useContext } from "react"
-import { AuthContext } from "../../context/Auth.context"
 import { WishlistContext } from "../../context/Wishlist.context"
 
 function WishlistProductCard({product}){
-    const {token} = useContext(AuthContext) 
     const {removeWishlistProduct} = useContext(WishlistContext);
 
     return(
@@ -24,7 +22,7 @@ function WishlistProductCard({product}){
             </div>
             <div className="flex items-center justify-between gap-3">
                 <button className="btn text-sm bg-primary-500 text-white">Add to Cart</button>
-                <button onClick={() => removeWishlistProduct(product._id, token)} className="btn text-lg bg-transparent text-gray-500 hover:text-red-600 transition-colors duration-300">
+                <button onClick={() => removeWishlistProduct(product._id)} className="btn text-lg bg-transparent text-gray-500 hover:text-red-600 transition-colors duration-300">
                     <FontAwesomeIcon icon={faTrash} />
                 </button>
             </div>
