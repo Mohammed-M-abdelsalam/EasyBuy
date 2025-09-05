@@ -17,6 +17,7 @@ function ProductCard({product}){
         setIsInWishlist(wishlistData?.find(product => product._id === id) ? true : false);
     }, [wishlistData, id]);
     function handleWishlistButton(){
+        if(!token) return
         if(!isInWishlist){
             addWishlistProduct(id, token)
             setIsInWishlist(true)
