@@ -9,7 +9,7 @@ function HomeDeals() {
     const [time, setTime] = useState(() => counterDown(new Date() + 600000))
     useEffect(() => {
         const interval = setInterval(() => {
-            const timer = counterDown(new Date(2025, 8, 16, 23, 59, 59))
+            const timer = counterDown(new Date(2025, 11, 16, 23, 59, 59))
             if (time.hours == 0 && time.minutes == 0 && time.seconds == 0){
                 clearInterval(interval)
                 return

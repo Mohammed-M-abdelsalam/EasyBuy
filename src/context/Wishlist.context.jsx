@@ -10,11 +10,9 @@ function WishlistProvider({ children }) {
     const {data, isLoading, isError, error} = useQuery({
         queryKey: ['wishlist'],
         queryFn: () => getWishlist(token),
+        enabled: !!token
     });
 
-    // function addWishlistProduct(productId, token) {
-    //     addToWishlist(productId, token)
-    // }
     const addMutation = useMutation({
         mutationFn: (productId) => addToWishlist(productId, token),
         onSuccess: () => queryClient.invalidateQueries(['wishlist']),
